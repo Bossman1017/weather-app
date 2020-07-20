@@ -11,8 +11,8 @@ app.use(bodyParser.urlencoded({extended : true}));
 app.use(express.static('public'));
 
 
-app.get('/', function(req,res){
-    res.render('index');
+app.get('/', (req, res) => {
+    res.render('index', {weather: null, error: null});
 })
 
 app.post('/', (req,res)=>{
@@ -26,7 +26,7 @@ request(url, function(err, response,body){
     else{
         let weather = JSON.parse(body)
         if(weather.main == undefined){
-            res.render('index', {weather : null, error : 'Memphis isnt a state'})
+            res.render('index', {weather : null, error : ' isnt a city'})
         } else{
             let weatherText = `Its ${weather.main.temp} degress in ${weather.name}`
             res.render('index', {weather: weatherText, error:null})
